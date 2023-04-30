@@ -15,8 +15,8 @@ function App() {
           aside
         </GridItem>
       </Show>
-      <GridItem area={"main"} bg={"red.400"}>
-        <GamesGrid/>
+      <GridItem area={"main"}>
+        <GamesGrid />
       </GridItem>
     </Grid>
   )
