@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
+import useData from "./useData";
 
 interface Genre{
     id : number;
@@ -9,22 +10,6 @@ interface Resopnd{
     count : number;
     results : Genre[];
 }
-
-const useGeners = () =>{
-    const [genres, setGenres] = useState<Genre[]>([]);
-    const [errors, setErrors] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
-    useEffect(() =>{
-      setIsLoading(true);
-      apiClient.get<Resopnd>("/genres").then(res => {
-        setGenres(res.data.results);
-        setIsLoading(false);
-      }).catch(err =>{
-        setErrors(err.message);
-        setIsLoading(false);
-      })
-    },[]);
-    return {genres , errors, isLoading}
-};
+const useGeners = () => useData<Genre>("/genres");
 
 export default useGeners;
