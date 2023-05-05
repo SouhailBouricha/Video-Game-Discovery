@@ -17,7 +17,7 @@ function App() {
       </GridItem>
       <Show above="lg">
         <GridItem area={"aside"} paddingX={5}>
-          <GenersList updateGener={(gener) => setSelectedGenres(gener)}/>
+          <GenersList SelectedGener={selectedGenres} updateGener={(gener) => setSelectedGenres(gener)}/>
         </GridItem>
       </Show>
       <GridItem area={"main"}>

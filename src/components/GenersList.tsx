@@ -5,8 +5,9 @@ import { Genre } from '../hook/useGeners';
 
 interface Props {
     updateGener : (genre : Genre) => void;
+    SelectedGener : Genre | null;
 }
-function GenersList({ updateGener } : Props) {
+function GenersList({ updateGener,SelectedGener } : Props) {
     const { data,isLoading,errors } = useGeners();
     if(errors) return null;
     if(isLoading){
@@ -27,7 +28,7 @@ function GenersList({ updateGener } : Props) {
            {data.map(gener => <ListItem key={gener.id} paddingY={"5px"}>
             <HStack>
                 <Image src={gener.image_background} boxSize={"32px"} borderRadius={8}/> 
-                <Button onClick={() => updateGener(gener)} variant={"link"} fontSize={"lg"}>{gener.name}</Button>
+                <Button fontWeight={ gener.id === SelectedGener?.id ? "bold" : "normal"} onClick={() => updateGener(gener)} variant={"link"} fontSize={"lg"}>{gener.name}</Button>
             </HStack>
             </ListItem>)}
         </List>
