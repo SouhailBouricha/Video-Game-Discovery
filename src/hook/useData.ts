@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
-import { CanceledError } from "axios";
+import { AxiosRequestConfig, CanceledError } from "axios";
 
 
 interface Resopnd<T>{
@@ -8,14 +8,14 @@ interface Resopnd<T>{
     results : T[];
 }
 
-const useData = <T>(endpoint : string) => {
+const useData = <T>(endpoint : string, deps? : any[], requestConfig? : AxiosRequestConfig  ) => {
     const [data, setData] = useState<T[]>([]);
     const [errors, setErrors] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     useEffect(() =>{
       const controller = new AbortController();
       setIsLoading(true);
-      apiClient.get<Resopnd<T>>(endpoint).then(res => {
+      apiClient.get<Resopnd<T>>(endpoint,{...requestConfig}).then(res => {
         setData(res.data.results);
         setIsLoading(false);
       }).catch(err =>{
@@ -25,7 +25,7 @@ const useData = <T>(endpoint : string) => {
       })
 
       return () => controller.abort();
-    },[]);
+    },deps ? [...deps] : []);
     return {data , errors, isLoading}
 };
 
