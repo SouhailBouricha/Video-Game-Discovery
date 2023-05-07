@@ -21,6 +21,6 @@ interface Resopnd {
   results : Game[];
 }
 
-const useGames = (SelectedGenres : Genre | null,SelectedPlatform : Platfrom | null) => useData<Game>("/games",[SelectedGenres?.id,SelectedPlatform?.id], { params : { genres : SelectedGenres?.id, platforms : SelectedPlatform?.id }});
+const useGames = (SelectedGenres : Genre | null,SelectedPlatform : Platfrom | null,selectedOrder : string | null) => useData<Game>("/games",[SelectedGenres?.id,SelectedPlatform?.id,selectedOrder], { params : { genres : SelectedGenres?.id, platforms : SelectedPlatform?.id, ordering : selectedOrder }});
 
 export default useGames
