@@ -14,14 +14,12 @@ interface Props {
 function GamesGrid({ SelectedGenres,SelectedPlatform,selectedOrder,searchText} : Props) {
   const { data,errors,isLoading } =  useGames(SelectedGenres,SelectedPlatform,selectedOrder,searchText)
   const skeletonItem = [1,2,3,4,5,6];
+  if(errors) return <Text>{errors}</Text>
   return (
-    <>
-        {errors && <Text>{errors}</Text>}
-        <SimpleGrid columns={{sm : 1, md : 2, lg : 3}} padding={"10px"} spacing={10}>
-            {isLoading ? skeletonItem.map(item => <SkeletonCard key={item}/>) : null}
-            {data.map(game => <GameCard key={game.id} game={game}/>)}
-        </SimpleGrid>
-    </>
+      <SimpleGrid columns={{sm : 1, md : 2, lg : 3, xl : 4}} padding={"10px"} spacing={6}>
+          {isLoading ? skeletonItem.map(item => <SkeletonCard key={item}/>) : null}
+          {data.map(game => <GameCard key={game.id} game={game}/>)}
+      </SimpleGrid>
   )
 }
 
