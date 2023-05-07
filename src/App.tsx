@@ -11,6 +11,7 @@ function App() {
   const [selectedGenres,setSelectedGenres] = useState<Genre | null>(null);
   const [selectedPlatform,setSelectedPlatform] = useState<Platfrom | null>(null);
   const [selectedOrder,setSelectedOrder] = useState<string | null>(null);
+  const [searchText,setSearchText] = useState<string | null>(null);
   return (
     <Grid templateAreas={{
       base : `"nav" "main"`,
@@ -18,7 +19,7 @@ function App() {
     }} templateColumns={{ base : "1fr",
     lg : "200px 1fr",}}>
       <GridItem area={"nav"}>
-        <Navbar />
+        <Navbar updateSearchText={(searchText) => setSearchText(searchText)}/>
       </GridItem>
       <Show above="lg">
         <GridItem area={"aside"} paddingX={5}>
@@ -32,7 +33,7 @@ function App() {
           </Box>
           <SortSelector updateOrder={(order) => setSelectedOrder(order)} selectedOrder={selectedOrder}/>
         </Flex>
-        <GamesGrid SelectedGenres={selectedGenres} SelectedPlatform={selectedPlatform} selectedOrder={selectedOrder}/>
+        <GamesGrid SelectedGenres={selectedGenres} SelectedPlatform={selectedPlatform} selectedOrder={selectedOrder} searchText={searchText}/>
       </GridItem>
     </Grid>
   )

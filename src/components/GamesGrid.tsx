@@ -9,9 +9,10 @@ interface Props {
   SelectedGenres : Genre | null;
   SelectedPlatform : Platfrom | null;
   selectedOrder : string | null;
+  searchText : string | null;
 }
-function GamesGrid({ SelectedGenres,SelectedPlatform,selectedOrder} : Props) {
-  const { data,errors,isLoading } =  useGames(SelectedGenres,SelectedPlatform,selectedOrder)
+function GamesGrid({ SelectedGenres,SelectedPlatform,selectedOrder,searchText} : Props) {
+  const { data,errors,isLoading } =  useGames(SelectedGenres,SelectedPlatform,selectedOrder,searchText)
   const skeletonItem = [1,2,3,4,5,6];
   return (
     <>
