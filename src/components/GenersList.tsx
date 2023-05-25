@@ -8,8 +8,8 @@ interface Props {
     SelectedGener : Genre | null;
 }
 function GenersList({ updateGener,SelectedGener } : Props) {
-    const { data,isLoading,errors } = useGeners();
-    if(errors) return null;
+    const { data,isLoading,error } = useGeners();
+    if(error) return null;
     if(isLoading){
         return(
         <List>
@@ -27,7 +27,7 @@ function GenersList({ updateGener,SelectedGener } : Props) {
         <>
             <Heading fontSize={"2xl"} marginBottom={3}>Genres</Heading>
             <List>
-               {data.map(gener => <ListItem key={gener.id} paddingY={"5px"}>
+               {data?.results.map(gener => <ListItem key={gener.id} paddingY={"5px"}>
                 <HStack>
                     <Image src={gener.image_background} objectFit={"cover"} boxSize={"32px"} borderRadius={8}/> 
                     <Button whiteSpace={'normal'} textAlign={"left"} fontWeight={ gener.id === SelectedGener?.id ? "bold" : "normal"} onClick={() => updateGener(gener)} variant={"link"} fontSize={"lg"}>{gener.name}</Button>

@@ -12,7 +12,7 @@ function PlatformsSelector({updatePlatforms} : Props) {
     <Menu>
         <MenuButton as={Button} rightIcon={<BsChevronDown/>}>Platforms</MenuButton>
         <MenuList>
-            {data.map(platform => <MenuItem onClick={() => updatePlatforms(platform)} key={platform.id}>{platform.name}</MenuItem>)}
+            {data?.results.map(platform => <MenuItem onClick={() => updatePlatforms(platform)} key={platform.id}>{platform.name}</MenuItem>)}
         </MenuList>
     </Menu>
   )
